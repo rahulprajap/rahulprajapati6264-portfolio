@@ -8,14 +8,14 @@ const Projects = () => {
 
   const projects = [
     {
-      title: 'Project Management Tool',
+      title: 'Text to Speech Convertor',
       description:
-        'A collaborative platform for teams to manage tasks, track progress, and communicate effectively.',
+        'A fully client-side React application that converts text to speech using the Web Speech API. It features searchable voice selection, playback controls, adjustable rate & pitch, and audio download support—all wrapped in a clean, responsive Tailwind UI.',
       image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuDc1xriTpAK9AbF3jgkPcRJu2erubisa_P_axlB3TA8KV-1_tdNTiGIZAymBbo7T6IumATbSM2Hx7_pM17iUnj4uw4NBSZd5OJnEy0iMjymGpy5zMfUTkLTwIDoEpHkUrzxI8wduFEzviZQLdUfsyA7JEz6V03_y7NpD1ZcVjhPQcOpypSQbHA0V-fnMqADezFdNq6vBrVipWG5QVqtYQjKm5fjRKOTIPDEnv2EVI9Sir5hJj7QxnexCtfKgMlVQnzfmYdXuCsVsnU',
-      tags: ['React', 'Node.js', 'MongoDB'],
-      liveUrl: '#',
-      githubUrl: '#',
+        '/images/text-to-voice-generator.png',
+      tags: ['React', 'Tailwind', 'TTS service'],
+      liveUrl: 'https://text-to-speech-convertor-app.vercel.app/',
+      githubUrl: 'https://github.com/rahulprajap/text-to-speech-convertor-app',
     },
     {
       title: 'E-commerce Platform',
