@@ -1,5 +1,6 @@
-import { useState, useEffect, Suspense, lazy } from 'react'
+import { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ThemeProvider } from './context/ThemeContext'
 import Preloader from './components/Preloader'
 
 // Lazy load components
@@ -16,31 +17,10 @@ const NotFound = lazy(() => import('./components/NotFound'))
 
 
 function LandingPage() {
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('darkMode')
-    if (saved !== null) {
-      return saved === 'true'
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-  })
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-    localStorage.setItem('darkMode', darkMode.toString())
-  }, [darkMode])
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
-
   return (
     <div className="relative w-full overflow-x-hidden font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 transition-colors duration-300">
       <Suspense fallback={<Preloader />}>
-        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <Header />
         <main>
           <Hero />
           <About />
@@ -57,14 +37,16 @@ function LandingPage() {
 
 function App() {
   return (
-    <Router>
-      <Suspense fallback={<Preloader />}>
-        <Routes>
-          <Route index element={<LandingPage />} />
-          <Route path='/e-shopify' element={<NotFound />} />
-        </Routes>
-      </Suspense>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Suspense fallback={<Preloader />}>
+          <Routes>
+            <Route index element={<LandingPage />} />
+            <Route path='/e-shopify' element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </ThemeProvider>
   )
 }
 
