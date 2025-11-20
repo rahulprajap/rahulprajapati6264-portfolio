@@ -55,7 +55,7 @@ function App() {
     <Router>
       <Routes>
         <Route index element={<LandingPage />} />
-        <Route path='*' element={<NotFound />} />
+        <Route path='/e-shopify' element={<NotFound />} />
       </Routes>
     </Router>
   )
