@@ -82,7 +82,7 @@ const Hero = () => {
 
   return (
     <section
-      className="relative overflow-hidden pt-24 pb-20 sm:pt-32 sm:pb-28 lg:pt-40 lg:pb-32"
+      className="relative overflow-hidden pt-24 pb-20 sm:pt-32 sm:pb-28 lg:h-screen lg:pt-0 lg:pb-0 lg:flex lg:items-center"
       id="home"
     >
       {/* Animated Background Blobs */}
@@ -116,8 +116,8 @@ const Hero = () => {
       </div>
 
       <div className="mx-4 md:mx-20">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center my-8 lg:my-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center my-8 lg:my-0 lg:h-full">
           {/* Text Content */}
           <motion.div
             variants={containerVariants}
@@ -173,24 +173,69 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Image */}
+          {/* Profile Image with Rotating Tech Stack */}
           <motion.div
             variants={imageVariants}
             initial="hidden"
             animate="visible"
-            className="w-full flex items-center justify-center my-8 lg:my-0"
+            className="hidden lg:flex w-full items-center justify-center min-h-[450px] sm:min-h-[500px] md:min-h-[450px] lg:min-h-[500px] my-8 lg:my-0"
           >
-            <motion.div
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              transition={{ duration: 0.3 }}
-              className="w-full max-w-md h-auto bg-center bg-no-repeat aspect-square bg-cover rounded-2xl shadow-lift overflow-hidden"
-            >
-              <img 
-                src="/images/about-rahul-image.png" 
-                alt="Rahul Prajapati - Full-Stack Developer"
-                className="w-full h-fulls object-cover"
-              />
-            </motion.div>
+            <div className="relative w-full max-w-[600px] sm:max-w-[700px] md:max-w-[800px] lg:max-w-[900px] aspect-square overflow-visible">
+              {/* Center Profile Image */}
+              <div className="absolute inset-1/4 flex items-center justify-center">
+                  <img 
+                    src="/images/about-rahul-image.png" 
+                    alt="Rahul Prajapati - Full-Stack Developer"
+                    className="w-full h-full object-cover rounded-full"
+                    // style={{ objectFit: 'object-cover' }}
+                  />
+              </div>
+              
+              {/* React - Top Left */}
+              <div className="absolute top-[5%] left-[20%] flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 md:size-20 p-2 sm:p-3 bg-green-100/80 dark:bg-green-900/50 border-2 border-primary/50 rounded-full shadow-lg animate-float">
+                <img 
+                  alt="React" 
+                  className="w-full h-full rounded-full object-contain" 
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                />
+              </div>
+
+              {/* Node.js - Bottom Right */}
+              <div className="absolute bottom-[15%] right-[5%] flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:size-14 p-2 sm:p-2.5 bg-green-100/80 dark:bg-green-900/50 border-2 border-primary/50 rounded-full shadow-lg animate-float" style={{ animationDelay: '0.8s' }}>
+                <img 
+                  alt="Node.js" 
+                  className="w-full h-full rounded-full object-contain" 
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                />
+              </div>
+
+              {/* MongoDB - Bottom Center */}
+              <div className="absolute bottom-[0%] right-[35%] flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 md:size-20 p-2 sm:p-3 bg-green-100/80 dark:bg-green-900/50 border-2 border-primary/50 rounded-full shadow-lg animate-float" style={{ animationDelay: '0.4s' }}>
+                <img 
+                  alt="MongoDB" 
+                  className="w-full h-full rounded-full object-contain" 
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                />
+              </div>
+
+              {/* Tailwind CSS - Bottom Left */}
+              <div className="absolute bottom-[5%] left-[10%] flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 md:size-16 p-2 bg-green-100/80 dark:bg-green-900/50 border-2 border-primary/50 rounded-full shadow-lg animate-float" style={{ animationDelay: '1.2s' }}>
+                <img 
+                  alt="Tailwind CSS" 
+                  className="w-full h-full rounded-full object-contain" 
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+                />
+              </div>
+
+              {/* MySQL - Top Right */}
+              <div className="absolute top-[10%] right-[10%] flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 md:size-16 p-2 bg-green-100/80 dark:bg-green-900/50 border-2 border-primary/50 rounded-full shadow-lg animate-float" style={{ animationDelay: '0.5s' }}>
+                <img 
+                  alt="MySQL" 
+                  className="w-full h-full rounded-full object-contain" 
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                />
+              </div>
+            </div>
           </motion.div>
           </div>
         </div>

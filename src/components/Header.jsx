@@ -65,7 +65,7 @@ const Header = ({ darkMode, toggleDarkMode }) => {
               </svg>
             </div>
             <h2 className="font-heading text-lg font-bold tracking-[-0.015em] text-slate-900 dark:text-white">
-              Rahul Prajapati
+              Rahul
             </h2>
           </motion.div>
 
