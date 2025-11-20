@@ -88,13 +88,13 @@ const Header = ({ darkMode, toggleDarkMode }) => {
           </nav>
 
           {/* Theme Toggle & CTA */}
-          <div className="flex items-center gap-4 ml-6 lg:ml-8">
+          <div className="flex items-center gap-6 ml-6 lg:ml-8">
             {/* Theme Toggle */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleDarkMode}
-              className="px-2 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors"
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors"
               aria-label="Toggle dark mode"
             >
               {darkMode ? (

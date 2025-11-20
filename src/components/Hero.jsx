@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
 const Hero = () => {
-  const words = ['React Developer','Backend Developer','Fullstack developer']
+  const words = ['React Developer','Backend Developer','MERN Developer']
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [currentText, setCurrentText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -182,12 +182,14 @@ const Hero = () => {
           >
             <div className="relative w-full max-w-[600px] sm:max-w-[700px] md:max-w-[800px] lg:max-w-[900px] aspect-square overflow-visible">
               {/* Center Profile Image */}
-              <div className="absolute inset-1/4 flex items-center justify-center">
+              <div className="absolute inset-[20%] flex items-center justify-center">
+                  {/* Green Shadow/Glow Effect */}
+                  <div className="absolute inset-0 bg-primary/30 dark:bg-primary/40 rounded-full blur-3xl scale-110 animate-pulse"></div>
+                  <div className="absolute inset-0 bg-primary/20 dark:bg-primary/30 rounded-full blur-2xl scale-105"></div>
                   <img 
                     src="/images/about-rahul-image.png" 
                     alt="Rahul Prajapati - Full-Stack Developer"
-                    className="w-full h-full object-cover rounded-full"
-                    // style={{ objectFit: 'object-cover' }}
+                    className="relative w-full h-full object-cover rounded-full border-2 border-primary/50 shadow-[0_0_60px_rgba(29,191,115,0.5)] dark:shadow-[0_0_60px_rgba(29,191,115,0.6)]"
                   />
               </div>
               
