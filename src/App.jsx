@@ -4,6 +4,7 @@ import { ThemeProvider } from './context/ThemeContext'
 import Preloader from './components/Preloader'
 
 // Lazy load components
+const ImportantUpdates = lazy(() => import('./components/ImportantUpdates'))
 const Header = lazy(() => import('./components/Header'))
 const Hero = lazy(() => import('./components/Hero'))
 const About = lazy(() => import('./components/About'))
@@ -20,6 +21,7 @@ function LandingPage() {
   return (
     <div className="relative w-full overflow-x-hidden font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 transition-colors duration-300">
       <Suspense fallback={<Preloader />}>
+        <ImportantUpdates />
         <Header />
         <main>
           <Hero />

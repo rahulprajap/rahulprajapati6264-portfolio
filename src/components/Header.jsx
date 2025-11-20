@@ -6,6 +6,10 @@ const Header = () => {
   const { darkMode, toggleDarkMode } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [bannerVisible, setBannerVisible] = useState(() => {
+    const saved = localStorage.getItem('importantUpdatesClosed')
+    return saved !== 'true'
+  })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +17,27 @@ const Header = () => {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const checkBannerVisibility = () => {
+      const saved = localStorage.getItem('importantUpdatesClosed')
+      setBannerVisible(saved !== 'true')
+    }
+    
+    // Check on mount
+    checkBannerVisibility()
+    
+    // Listen for banner close event
+    const handleBannerClose = () => {
+      setBannerVisible(false)
+    }
+    
+    window.addEventListener('bannerClosed', handleBannerClose)
+    
+    return () => {
+      window.removeEventListener('bannerClosed', handleBannerClose)
+    }
   }, [])
 
   const navLinks = [
@@ -38,7 +63,9 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
+        bannerVisible ? 'top-[48px]' : 'top-0'
+      } ${
         scrolled
           ? 'bg-background-light/95 dark:bg-background-dark/95 shadow-soft'
           : 'bg-background-light/80 dark:bg-background-dark/80'
