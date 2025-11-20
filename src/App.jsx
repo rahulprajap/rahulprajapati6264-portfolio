@@ -1,19 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Header from './components/Header'
-import Hero from './components/Hero'
-import About from './components/About'
-import Experience from './components/Experience'
-import Services from './components/Services'
-import Projects from './components/Projects'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import NotFound from './components/NotFound'
+import Preloader from './components/Preloader'
+
+// Lazy load components
+const Header = lazy(() => import('./components/Header'))
+const Hero = lazy(() => import('./components/Hero'))
+const About = lazy(() => import('./components/About'))
+const Experience = lazy(() => import('./components/Experience'))
+const Services = lazy(() => import('./components/Services'))
+const Projects = lazy(() => import('./components/Projects'))
+const Contact = lazy(() => import('./components/Contact'))
+const Footer = lazy(() => import('./components/Footer'))
+const NotFound = lazy(() => import('./components/NotFound'))
 
 
 
 function LandingPage() {
-
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode')
     if (saved !== null) {
@@ -34,18 +36,21 @@ function LandingPage() {
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
+
   return (
     <div className="relative w-full overflow-x-hidden font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 transition-colors duration-300">
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Services />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
+      <Suspense fallback={<Preloader />}>
+        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <main>
+          <Hero />
+          <About />
+          <Experience />
+          <Services />
+          <Projects />
+          <Contact />
+        </main>
+        <Footer />
+      </Suspense>
     </div>
   )
 }
@@ -53,10 +58,12 @@ function LandingPage() {
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route index element={<LandingPage />} />
-        <Route path='/e-shopify' element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={<Preloader />}>
+        <Routes>
+          <Route index element={<LandingPage />} />
+          <Route path='/e-shopify' element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </Router>
   )
 }
