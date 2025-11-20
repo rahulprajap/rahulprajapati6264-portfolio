@@ -11,8 +11,7 @@ const Projects = () => {
       title: 'Text to Speech Convertor',
       description:
         'A fully client-side React application that converts text to speech using the Web Speech API. It features searchable voice selection, playback controls, adjustable rate & pitch, and audio download support—all wrapped in a clean, responsive Tailwind UI.',
-      image:
-        '/images/text-to-voice-generator.png',
+      image:'/images/text-to-voice-generator.png',
       tags: ['React', 'Tailwind', 'TTS service'],
       liveUrl: 'https://text-to-speech-convertor-app.vercel.app/',
       githubUrl: 'https://github.com/rahulprajap/text-to-speech-convertor-app',
@@ -28,14 +27,13 @@ const Projects = () => {
       githubUrl: '#',
     },
     {
-      title: 'Social Media App',
+      title: 'Portfolio  App',
       description:
-        'A social networking application with real-time chat, user profiles, and content sharing features.',
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuACjQbm7Gdo0sFqaTiyvwkjbqoxURZZpOgii5VoJ3M9B2rtuwR73MF_rwZTMBJXC2LHhR83bQZXO2GCNc-d8Xnu9tJEWsjIIjtsyCHn9pYTV72t5L5RegptCxN4lyLiM-TarNVRxyitZZyJg4U8FIITmNq8WhRyIJWsYNd7Z1_nj6lja1hIjZ2AtGT0QvO2P_j-KrP60q8A2sFIdvKGt_ZNMPgGvo8LAlKu0-X6JB07JPuQ6c_IIfNLInnlw7B7s-lkvoRXgiJSNPg',
-      tags: ['React Native', 'Firebase', 'Socket.IO'],
-      liveUrl: '#',
-      githubUrl: '#',
+        'My portfolio showcases my expertise as a modern full-stack developer, highlighting my skills in React, Node.js, MongoDB, and Express.js. The site features clean, responsive design, a clear “About Me” section, and a curated list of professional projects.',
+      image:'/images/rahul-prajapati-portfolio-dark.png',
+      tags: ['React', 'Tailwind CSS','HTML','JS'],
+      liveUrl: 'https://rahulprajapati6264-portfolio.vercel.app/',
+      githubUrl: 'https://github.com/rahulprajap/rahulprajapati6264-portfolio',
     },
   ]
 
