@@ -17,23 +17,23 @@ const Projects = () => {
       githubUrl: 'https://github.com/rahulprajap/text-to-speech-convertor-app',
     },
     {
+      title: 'Portfolio  App',
+      description:
+      'My portfolio showcases my expertise as a modern full-stack developer, highlighting my skills in React, Node.js, MongoDB, and Express.js. The site features clean, responsive design, a clear “About Me” section, and a curated list of professional projects.',
+      image:'/images/rahul-prajapati-portfolio-dark.png',
+      tags: ['React', 'Tailwind CSS','HTML','JS'],
+      liveUrl: 'https://rahulprajapati6264-portfolio.vercel.app/',
+      githubUrl: 'https://github.com/rahulprajap/rahulprajapati6264-portfolio',
+    },
+    {
       title: 'E-commerce Platform',
       description:
         'A feature-rich online store with product catalogs, shopping cart, and secure checkout.',
       image:
         'https://lh3.googleusercontent.com/aida-public/AB6AXuAfJBY3Fglly7wUPKQMaPlylutZvwwCijtY5b9NwErHENcZcxMI2FA-zHv5WChgXi_AmTzEIdnRtfTlhlhF59nwx2gyyBC08TCye0HDVTTwWX1uowWZ0ETIn0rfp7558YrWyud6jA3yjNeHHvFg_1T6Xk2Z6IaBN01221ikWF4fMO6R4XACJZO1t203ku1KGVpyQr_EUbMGDM9l3nDkN7civ92yq_W37oYopuKkk7D1iIH95veLJSQdhnwuAnHBX4E6dLEXmldrpQY',
-      tags: ['Next.js', 'Stripe', 'GraphQL'],
-      liveUrl: '#',
-      githubUrl: '#',
-    },
-    {
-      title: 'Portfolio  App',
-      description:
-        'My portfolio showcases my expertise as a modern full-stack developer, highlighting my skills in React, Node.js, MongoDB, and Express.js. The site features clean, responsive design, a clear “About Me” section, and a curated list of professional projects.',
-      image:'/images/rahul-prajapati-portfolio-dark.png',
-      tags: ['React', 'Tailwind CSS','HTML','JS'],
-      liveUrl: 'https://rahulprajapati6264-portfolio.vercel.app/',
-      githubUrl: 'https://github.com/rahulprajap/rahulprajapati6264-portfolio',
+      tags: ['React', 'Tailwind','Typescript','Node', 'Express', ,'Mongodb'],
+      liveUrl: '/',
+      githubUrl: 'https://github.com/rahulprajap',
     },
   ]
 
