@@ -184,12 +184,12 @@ const Hero = () => {
               {/* Center Profile Image */}
               <div className="absolute inset-[20%] flex items-center justify-center">
                   {/* Green Shadow/Glow Effect */}
-                  <div className="absolute inset-0 bg-primary/30 dark:bg-primary/40 rounded-full blur-3xl scale-110 animate-pulse"></div>
-                  <div className="absolute inset-0 bg-primary/20 dark:bg-primary/30 rounded-full blur-2xl scale-105"></div>
+                  <div className="absolute inset-0 bg-primary/30 dark:bg-white/30 rounded-full blur-3xl scale-110 animate-pulse"></div>
+                  <div className="absolute inset-0 bg-primary/20 dark:bg-white/20 rounded-full blur-2xl scale-105"></div>
                   <img 
                     src="/images/about-rahul-image.png" 
                     alt="Rahul Prajapati - Full-Stack Developer"
-                    className="relative w-full h-full object-cover rounded-full border-2 border-primary/50 shadow-[0_0_60px_rgba(29,191,115,0.5)] dark:shadow-[0_0_60px_rgba(29,191,115,0.6)]"
+                    className="relative w-full h-full object-cover rounded-full border-2 border-primary/50 shadow-[0_0_60px_rgba(29,191,115,0.5)] dark:shadow-[0_0_60px_rgba(255,255,255,0.4)]"
                   />
               </div>
               
