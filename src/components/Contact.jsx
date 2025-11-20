@@ -1,30 +1,92 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
+  const [formData, setFormData] = useState({name: '', email: '',  message: '',})
+  const [errors, setErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
 
   const handleChange = (e) => {
+    const { name, value } = e.target
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     })
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: '',
+      })
+    }
+    if (submitStatus) {
+      setSubmitStatus(null)
+    }
   }
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    const newErrors = {}
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required'
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address'
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required'
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters long'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    // Reset form
-    setFormData({ name: '', email: '', message: '' })
-    alert('Thank you for your message! I will get back to you soon.')
+
+    if (!validateForm()) {
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    try {
+      // EmailJS configuration
+      // You need to replace these with your own EmailJS credentials
+      // Get them from https://www.emailjs.com/
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_email: 'rahulpri6264@gmail.com',
+      }
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey)
+
+      setSubmitStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+      setErrors({})
+    } catch (error) {
+      console.error('EmailJS error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const socialLinks = [
@@ -98,9 +160,6 @@ const Contact = () => {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <label className="sr-only" htmlFor="name">
-                Name
-              </label>
               <input
                 type="text"
                 id="name"
@@ -110,17 +169,21 @@ const Contact = () => {
                 required
                 placeholder="Your Name"
                 autoComplete="name"
-                className="block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-2 focus:ring-primary transition-all duration-200"
+                className={`block w-full rounded-lg border ${
+                  errors.name
+                    ? 'border-red-500 dark:border-red-500'
+                    : 'border-slate-300 dark:border-slate-700'
+                } bg-white dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-2 focus:ring-primary transition-all duration-200`}
               />
+              {errors.name && (
+                <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.name}</p>
+              )}
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <label className="sr-only" htmlFor="email">
-                Email
-              </label>
               <input
                 type="email"
                 id="email"
@@ -130,17 +193,22 @@ const Contact = () => {
                 required
                 placeholder="Your Email"
                 autoComplete="email"
-                className="block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-2 focus:ring-primary transition-all duration-200"
+                className={`block w-full rounded-lg border ${
+                  errors.email
+                    ? 'border-red-500 dark:border-red-500'
+                    : 'border-slate-300 dark:border-slate-700'
+                } bg-white dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-2 focus:ring-primary transition-all duration-200`}
               />
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.email}</p>
+              )}
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <label className="sr-only" htmlFor="message">
-                Message
-              </label>
+             
               <textarea
                 id="message"
                 name="message"
@@ -149,21 +217,85 @@ const Contact = () => {
                 required
                 placeholder="Your Message"
                 rows="5"
-                className="block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-2 focus:ring-primary transition-all duration-200 resize-none"
+                className={`block w-full rounded-lg border ${
+                  errors.message
+                    ? 'border-red-500 dark:border-red-500'
+                    : 'border-slate-300 dark:border-slate-700'
+                } bg-white dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-2 focus:ring-primary transition-all duration-200 resize-none`}
               />
+              {errors.message && (
+                <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.message}</p>
+              )}
             </motion.div>
+            {submitStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 rounded-lg bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 border border-green-300 dark:border-green-700"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined">check_circle</span>
+                  <p className="text-sm font-medium">
+                    Thank you for your message! I will get back to you soon.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+
+            {submitStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 border border-red-300 dark:border-red-700"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined">error</span>
+                  <p className="text-sm font-medium">
+                    Something went wrong. Please try again or contact me directly at rahulpri6264@gmail.com
+                  </p>
+                </div>
+              </motion.div>
+            )}
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <motion.button
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                 type="submit"
-                className="w-full flex items-center justify-center px-6 py-3 border border-transparent rounded-lg shadow-lift text-base font-bold text-white bg-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200"
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center px-6 py-3 border border-transparent rounded-lg shadow-lift text-base font-bold text-white bg-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </motion.button>
             </motion.div>
           </motion.form>
