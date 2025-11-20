@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -7,8 +8,12 @@ import Services from './components/Services'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import NotFound from './components/NotFound'
 
-function App() {
+
+
+function LandingPage() {
+
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode')
     if (saved !== null) {
@@ -29,7 +34,6 @@ function App() {
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
-
   return (
     <div className="relative w-full overflow-x-hidden font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 transition-colors duration-300">
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
@@ -43,6 +47,17 @@ function App() {
       </main>
       <Footer />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route index element={<LandingPage />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </Router>
   )
 }
 
