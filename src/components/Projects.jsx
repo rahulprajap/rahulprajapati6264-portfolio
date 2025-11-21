@@ -30,9 +30,9 @@ const Projects = () => {
       description:
         'A feature-rich online store with product catalogs, shopping cart, and secure checkout.',
       image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuAfJBY3Fglly7wUPKQMaPlylutZvwwCijtY5b9NwErHENcZcxMI2FA-zHv5WChgXi_AmTzEIdnRtfTlhlhF59nwx2gyyBC08TCye0HDVTTwWX1uowWZ0ETIn0rfp7558YrWyud6jA3yjNeHHvFg_1T6Xk2Z6IaBN01221ikWF4fMO6R4XACJZO1t203ku1KGVpyQr_EUbMGDM9l3nDkN7civ92yq_W37oYopuKkk7D1iIH95veLJSQdhnwuAnHBX4E6dLEXmldrpQY',
+        '/images/e-commerce.png',
       tags: ['React', 'Tailwind','Typescript','Node', 'Express', ,'Mongodb'],
-      liveUrl: '/e-shopify',
+      liveUrl: 'https://e-shopify-zeta.vercel.app',
       githubUrl: 'https://github.com/rahulprajap',
     },
   ]
