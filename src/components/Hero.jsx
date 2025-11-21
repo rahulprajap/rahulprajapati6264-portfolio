@@ -80,6 +80,26 @@ const Hero = () => {
     }
   }
 
+  const handleDownloadResume = async () => {
+  try {
+    const res = await fetch('/resume.pdf');
+    if (!res.ok) throw new Error();
+
+    const url = URL.createObjectURL(await res.blob());
+    const a = Object.assign(document.createElement('a'), {
+      href: url,
+      download: 'Rahul-Prajapati-Resume.pdf'
+    });
+
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch {
+
+    window.open('/resume.pdf', '_blank');
+  }
+};
+
+
   return (
     <section
       className="relative overflow-hidden pt-24 pb-20 sm:pt-32 sm:pb-28 lg:h-screen lg:pt-0 lg:pb-0 lg:flex lg:items-center"
@@ -166,6 +186,7 @@ const Hero = () => {
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={handleDownloadResume}
                 className="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors shadow-soft"
               >
                 <span className="truncate">Download Resume</span>
