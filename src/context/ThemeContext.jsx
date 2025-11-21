@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react'
 
 const ThemeContext = createContext()
 
-export const ThemeProvider = ({ children }) => {
+export const ThemeContextProvider = ({ children }) => {
 
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode')
@@ -32,10 +32,10 @@ export const ThemeProvider = ({ children }) => {
   );
 }
 
-export const useTheme = () => {
+export const useThemeContextApi = () => {
   const context = useContext(ThemeContext)
   if (context) {
     return context;
   }
-  return new Error('useTheme must be used within a ThemeProvider')
+  return new Error('useThemeContextApi must be used within a ThemeProvider')
 }

@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ThemeProvider } from './context/ThemeContext'
+import { Routes, Route } from 'react-router-dom'
+import { ThemeContextProvider } from './context/ThemeContext'
+import { BannerContextProvider } from './context/BannerContext'
 import Preloader from './components/Preloader'
 
 // Lazy load components
@@ -39,16 +40,16 @@ function LandingPage() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <Router>
+    <ThemeContextProvider>
+      <BannerContextProvider>
         <Suspense fallback={<Preloader />}>
           <Routes>
             <Route index element={<LandingPage />} />
             <Route path='/e-shopify' element={<NotFound />} />
           </Routes>
         </Suspense>
-      </Router>
-    </ThemeProvider>
+      </BannerContextProvider>
+    </ThemeContextProvider>
   )
 }
 
